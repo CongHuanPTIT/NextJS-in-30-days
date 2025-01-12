@@ -1,0 +1,1 @@
+console.log("This is JavaScript") // console.log prints output to screen
