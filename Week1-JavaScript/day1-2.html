@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. Variables
+        let my_name = 'Cong Huan Nguyen'      // Variables come in different definitions: var, let, const,...
+        let age = 24                          // A variable can hold any type of data 
+        document.write(my_name + "<br/>")      // In web development, adding <br/> into "write" instead of putting it outside
+        document.write("20"+(age+1) + "<br/>") // For new projects, "var" is almost never used
+        console.log(my_name)                  // document.write push output to web screen, console.log push output to console screen
+    </script>
+    <script>
+        document.write("<br>")
+        // 2. Operations
+        let first = 5; let second = 10;       // Semi-colons are optional for most cases; this is an edge case where it's mandatory 
+        document.write("Addition: 5 + 10 = " + (first + second) + "<br/>")
+        first += 5                            // Operations mostly stay the same as other languages
+        document.write(first + "<br/>")        // You can even add a string with a number directly, like line 14
+        second--
+        document.write(second + "<br/>")
+        document.write("Subtraction: 10 - 9 = " + (first - second) + "<br/>")
+        document.write("Multiplication: 10 * 9 = " + (first * second) + "<br/>")
+        document.write("Division: 15 : 5 = " + ((first + 5) / (second - 4)) + "<br/>")
+    </script>
+    <script>
+        document.write("<br>")
+        // 3. Objects, Strings, Arrays
+        let me = {                            // A JavaScript Object acts like a map/dictionary/etc. with indexes and values          
+            name: "Nguyen Cong Huan",         // Strings are also objects in single/double quotes
+            gender: "Male",
+            age: 24,
+            education: "PTIT",
+            graduated: true,
+            introduction: function() {        // An object can also take in a function as an attribute
+                document.write("Hello eveyone I am new to JavaScript <br>")
+            }
+        };                                    // Traverse and get values from index/attribute
+        document.write("Education: " + me.education + "<br/>") 
+        document.write("Graduated? " + me.graduated + "<br/>")
+        me.introduction()
+                                              // An array is an object holding many variables
+        const favorites = new Array('computers', 'games', 'browsing internet', 'music')
+        console.log(favorites)                
+        document.write(favorites[0] + "<br/>")
+    </script>
+    <script>
+        document.write("<br>")
+        // 4. Control statements (if/else/while/...)
+        let my_work = ""
+        let his_work = "Viettel"
+        // If-Else statements
+        if (his_work == "") {
+            console.log("Work is empty!")
+            document.write("You should get a job!" + "<br/>")
+        }
+        else {
+            console.log("Keep up the good work")
+        }
+        // Switch-Case statements
+        let input = 1
+        switch (input) {
+            case 1:
+                document.write("Add to cart" + "<br/>")
+                break;
+            case 2:
+                document.write("Remove from cart" + "<br/>")
+                break;
+            case 3:
+                console.log("Exited")
+                break;
+            default:
+                document.write("Invalid statement" + "<br/>")
+                console.log("Invalid statement")
+                break;
+        }
+    </script>
+    <script>
+        document.write("<br>")
+        // 5. Loop statements (for/while)
+        // Normal loop using index
+        for (let i = 0; i < favorites.length; i++) {
+            document.write("I love " + favorites[i] + "<br/>")
+        }
+        // For...of loop
+        for (const favor of favorites) {
+            console.log(favor)
+        }
+    </script>
+    <script>
+        document.write("<br/>")
+        // 6. Functions
+        function print_to_n(n) {                        // Useful for repeated actions
+            for (let i = 1; i <= n; i++) {
+                document.write("Number ", i, "<br/>")   // A string can also be formatted like this
+            }
+        }
+        let tests = 3
+        for (let i = 1; i <= tests; i++) {
+            document.write("Test ", i, ":<br/>")
+            print_to_n(3)
+        }
+    </script>
+</body>
+</html>
