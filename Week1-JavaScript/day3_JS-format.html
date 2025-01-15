@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Day 3 - 4</title>
+</head>
+<body>
+    <h1>Advanced JS</h1>
+    <script>
+        // 1. Advanced arrays
+        let arr = new Array('USD', 5, true)         // JS arrays can hold many data types
+        arr[3] = 'VND'                              // JS arrays' size is dynamic
+        document.write(arr)
+
+        document.write('<br/>')
+        // 2. Dealing with float numbers
+        document.write('0.1 + 0.2 = ', 0.1 + 0.2, '<br/>')   // Result shows 0.30000000000000004, which is not what we want
+        
+        let num1 = 1; let num2 = 2                           // Best practice is to add integers first
+        document.write('0.1 + 0.2 = ', (num1 + num2) / 10)   // then divide with appropriate powers of 10
+        
+        const cart1 = 28.65; const cart2 = 7.94;
+        console.log((cart1*100 + cart2*100) / 100);          // Recommended when working with money-related projects
+        console.log(Math.round((cart1*10 + cart2*10)) / 100) // eg. Estimated tax (10%) - using Math.round()
+    
+        document.write('<br/>')
+        // 3. Formatting strings
+        document.write('Hello', ' ', "Hello", ' ', `Hello`, '<br/>')  
+        // Single quotes, double quotes, backticks can all be used to create strings
+        /* 
+            Line 25 is already a formatted string, we can use that approach, however the code's extremely hard to understand
+        document.write('Total (' + (1 + 1) + ' items): $', (cart1*100 + cart2*100) / 100)
+            This is where backticks come in handy
+        */
+        let total = cart1*100 + cart2*100
+        let tax = 0.1
+        // ${} acts like a template, used to insert a variable directly into a string
+        document.write(`Total (${1 + 1} items): $${total / 100} <br/>`)
+        document.write(`Estimated tax (${tax*100}%): $${Math.round(total * tax) / 100}`)
+    </script>
+    <!--alert() is used to create a pop-up box-->
+    <button title="Confirm your purchase" onclick="alert('Submitted! Please wait')">
+        Checkout
+    </button>
+</body>
+</html>

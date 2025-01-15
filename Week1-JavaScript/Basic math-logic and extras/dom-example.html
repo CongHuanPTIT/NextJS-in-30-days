@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM example</title>
+</head>
+<body>
+    <button>
+        Click here
+    </button>
+    <button class="change" onclick="
+        changeText()
+    ">
+        Change here
+    </button>
+    <script>
+        /*
+        DOM = Document Object Model is one of the most important parts of JavaScript
+        DOM combines HTML and JS together to give JS control of the webpage
+        */
+        console.log(document.title)             // document.title gets the title of webpage         
+        document.title = 'Title change'         // change it, and the web title changes as well
+        console.log(document.body)              // the <body> of the webpage
+        console.log(document.body.innerHTML)    // "body.innerHTML" gets the entire HTML webpage inside <body>
+        // console.log(document.querySelector('button'))   // get any element from the webpage
+        
+        /*
+        Every HTML element has ".innerHTML" as a property, which gets context inside the element
+        In cases of multiple same elements, add an attribute (eg.class) to the element
+        and use ".class" inside the querySelector
+        */  
+        function changeText() {
+            let buttonText = document.querySelector('.change')
+            if (buttonText.innerHTML === 'Change here')
+                buttonText.innerHTML = 'Changed'
+            else
+                buttonText.innerHTML = 'Change here'
+        }
+    </script>
+</body>
+</html>

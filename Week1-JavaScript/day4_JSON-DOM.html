@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON - DOM Practice</title>
+</head>
+<body>
+    <h2>Pick your move</h2>
+    <button onclick="                       // onclick directly is considered bad practice. Fix later        
+        returnResult('Rock')
+    ">
+        Rock
+    </button>
+    <button onclick="
+        returnResult('Paper')
+    ">
+        Paper
+    </button>
+    <button onclick="
+        returnResult('Scissors')
+    ">
+        Scissors
+    </button>
+    <p class="moves"></p>
+    <p class="showResult"></p>
+    <p class="scoreHolder"></p>
+    <button onclick="
+        score.wins = 0
+        score.ties = 0
+        score.losses = 0
+        localStorage.removeItem('score')
+        alert('Score reset!')
+        updateScore()
+    ">
+        Reset score
+    </button>
+    <script>
+        /*
+        const score = {
+            wins: 0,
+            ties: 0,
+            losses: 0,
+        }
+        Coding like above => Game resets every time the browser closes. The function to resume 
+        requires JSON.parse and localStorage 
+        */
+        let score = JSON.parse(localStorage.getItem('score')) || {
+            wins: 0,                                    // The || "or" operatior ensures
+            ties: 0,                                    // first time launching the game
+            losses: 0                                   // would create a default value
+        }
+        let result = ''
+        document.querySelector('.moves').innerHTML = 'You VS Computer'
+        updateScore()
+        
+        function cpu() {
+            const moves = ['Rock', 'Paper', 'Scissors']
+            return moves[Math.floor(Math.random() * 3)] // Get a random number from 0 to 2
+        }
+
+        function returnResult(myMove) {
+            // Generate CPU move from function
+            const cpuMove = cpu()             
+            // Every time a game is played, display the results and update the innerHTML line
+            document.querySelector('.moves').innerHTML = `You ${myMove} VS ${cpuMove} Computer`
+            
+            if (myMove == cpuMove) {
+                score.ties++
+                result = 'You tied!'
+            }
+            else if ((myMove == 'Rock' && cpuMove == 'Paper') || 
+                     (myMove == 'Scissors' && cpuMove == 'Rock') ||     
+                     (myMove == 'Paper' && cpuMove == 'Scissors')) {
+                score.losses++
+                result = 'You lost!'
+            } else {
+                score.wins++
+                result = 'You won!'
+            }
+
+            // Set the score data in local storage and update it
+            localStorage.setItem('score', JSON.stringify(score))
+            updateScore()
+            // Display the result
+            document.querySelector('.showResult').innerHTML = result
+            // Track the results for correction 
+            // console.log(`Wins: ${score.wins}; Ties: ${score.ties}; Losses: ${score.losses}`)
+        }
+
+        // Function to actually update the score display screen
+        function updateScore() {
+            document.querySelector('.scoreHolder').innerHTML = `Wins: ${score.wins}; Ties: ${score.ties}; Losses: ${score.losses}`
+        }
+    </script>
+</body>
+</html>
