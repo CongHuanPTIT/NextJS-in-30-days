@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax and shipping calculate</title>
+</head>
+
+<body>
+    <!--HTML Layout-->
+    <div>                                
+        <h1>Tax and shipping calculator</h1>
+        <p class="description">
+            Order from below $50: +$5 shipping. <br />
+            Order from $50 - below $60: +$2 shipping. <br />
+            Order from $60 and above: Free shipping. <br />
+            All orders take 1% tax according to law.
+        </p>
+        <input placeholder="Order Cost" class="cost-input">
+        <button class="btn-calc">Calculate</button>
+        <p class="message"></p>
+    </div>
+
+    <style>
+        .description {
+            margin-bottom: 20px;
+        }
+
+        .cost-input {
+            font-size: 15px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .btn-calc {
+            font-size: 15px;
+            background-color: #04aa6d;
+            padding: 12px 15px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        // Provide variables
+        let message = document.querySelector('.message');
+        let btnCalculate = document.querySelector(".btn-calc");
+        let inputEle = document.querySelector(".cost-input");
+
+        // keydown => What happens when user press a key
+        inputEle.addEventListener("keydown", (event) => {
+            if (event.key === 'Enter') {
+                calculateCost()
+            }
+        })
+
+        // Function without () to wait for the button click to be finished
+        btnCalculate.addEventListener("click", calculateCost);
+
+        function calculateCost() {
+            let total = Number(inputEle.value)
+            if (isNaN(total) || total <= 0) {    // handles exception when the value is 0 or not a number 
+                message.innerText = "Invalid input. Try again.";
+            }
+            let tax = 0.01                  // put tax amount as variable in case of future use
+            if (total >= 60) {
+                total += (total * tax)
+            }
+            else if (total >= 50) {
+                total += (total * tax) + 2;
+            } 
+            else {
+                total += (total * tax) + 5;
+            }
+            console.log(total);
+            message.innerText = `Total cost: $${total}`;
+        }
+    </script>
+</body>
+
+</html>
