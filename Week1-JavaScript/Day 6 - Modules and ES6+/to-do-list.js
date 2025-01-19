@@ -20,8 +20,8 @@ fix later
 addTaskBtn.addEventListener('click', () => {
     const taskText = taskInput.value.trim();
     if (taskText) {
+        saveTask(taskText);
         addTaskDOM(taskText, taskList);
-        renderTaskDOM(taskText, taskList);
         taskInput.value = '';
     }
 })
