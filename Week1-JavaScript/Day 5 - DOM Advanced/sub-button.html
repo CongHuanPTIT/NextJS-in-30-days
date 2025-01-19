@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Subscribe Button</title>
+</head>
+<body>
+    <p id="container">Click the button below to subscribe. Click again to cancel subscription.</p>
+    <button class="btnSub">Subscribe</button>
+    <style>
+        .btnSub {
+            border: 0;
+            background-color: black;
+            color: white;
+            border-radius: 50px;
+            /* padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px; */
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btnSub-clicked {
+            background-color: aliceblue;
+            color: black;
+        }
+    </style>
+    <script type="module">
+        let container = document.getElementById('container')        // Create a container. 
+        let subscribeText = document.createElement('p')             //
+        let subBtn = document.querySelector('.btnSub')
+        subButton()
+
+        function subButton() {
+
+            subBtn.addEventListener('click', () => {
+                if (subBtn.innerHTML === 'Subscribe') {
+                    subBtn.innerHTML = 'Subscribed'
+                    subscribeText.innerText = 'You subscribed to channel'
+                    subBtn.classList.add('btnSub-clicked')
+                }
+                else {
+                    subBtn.innerHTML = 'Subscribe'
+                    subscribeText.innerText = 'You unsubscribed'
+                    subBtn.classList.remove('btnSub-clicked')
+                }
+                container.appendChild(subscribeText)
+            })
+        }
+    </script> 
+</body>
+</html>

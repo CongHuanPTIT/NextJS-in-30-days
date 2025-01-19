@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Advanced - Combining JS-HTML-CSS</title>
+</head>
+<body>
+    <!--HTML Content-->
+    <button class="btnUp">Up</button>
+    <button class="btnDown">Down</button>
+    <button class="btnReset">Reset</button>
+    <p class="counter"></p>
+    <!--CSS Styling-->
+    <style>
+        button {
+            cursor: pointer;
+        }
+        p {
+            padding-top: 20px;
+        }
+    </style>
+
+    <!--JavaScript-->
+    <script>
+        let count = localStorage.getItem('countEle') || 0                   // Set up a localStorage
+        let btnText = ''
+        document.querySelector('.counter').innerHTML = `Count: ${count}`    // Default display
+        const buttons = document.querySelectorAll('button')                 // All buttons share the same event function
+        btnEvent()              // therefore use querySelectorAll(html-tag)
+
+        function btnEvent() {
+            buttons.forEach(button => {
+                button.addEventListener('click', (btnEvent) => {            // use this instead of button "onclick"
+                    btnText = btnEvent.target.innerHTML
+                    // console.log(btnText);
+                    
+                    if (btnText === 'Up') {
+                        count++
+                    } else if (btnText === 'Down') {
+                        count--
+                    } else {
+                        localStorage.removeItem('countEle')
+                        count = 0
+                    }
+                    localStorage.setItem('countEle', JSON.stringify(count))
+                    updateCounter()
+                })
+            });
+        }
+
+        function updateCounter() {
+            document.querySelector('.counter').innerHTML = `Count: ${count}`    // Update display
+        }
+    </script>
+</body>
+</html>
