@@ -1,28 +1,32 @@
 button {
     padding: 12px 20px;
-    font-weight: bold;
     font-size: 15px;
     border: 0;
-}
-
-p {
-    font-size: 12px;
-}
-
-li {
-    font-size: 12px;
+    cursor: pointer;
+    color:white
 }
 
 input {
-    padding: 10px 20px;
+    padding: 8px 10px;
     font-size: 15px;
     margin-right: 10px;
 }
 
 .btnAdd {
-    background-color: rgb(17, 215, 17);
+    background-color: rgb(28, 106, 28);
 }
 
 .btnDelete {
-    background-color: red;
+    background-color: rgb(197, 21, 21);
+}
+
+.taskGrid,
+.taskGridDisplay {
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: grid;
+    grid-template-columns: 200px 160px 100px;
 }
