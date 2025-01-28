@@ -6,29 +6,6 @@ dateInput.min = new Date().toISOString().slice(0, 10);  // and adding properties
 const addTaskBtn = document.querySelector('.btnAdd');
 let taskList = JSON.parse(localStorage.getItem('tasks')) || [];
 
-// const init = () => {
-//     const tasks = getTask();
-//     renderTaskDOM(tasks, taskList);
-// }
-
-/*
-Uncaught TypeError: 
-Cannot read properties of null 
-(reading 'addEventListener')
-
-fix later
-*/ 
-// addTaskBtn.addEventListener('click', () => {
-//     const taskText = taskInput.value.trim();
-//     if (taskText) {
-//         saveTask(taskText);
-//         addTaskDOM(taskText, taskList);
-//         taskInput.value = '';
-//     }
-// })
-
-// init();
-
 // Render the task list and display it on the screen
 function renderTask() {         
     let taskListHTML = '';
