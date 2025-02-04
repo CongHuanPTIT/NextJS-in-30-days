@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 /*
@@ -44,8 +44,20 @@ const App = () => {
 */
 
 const App2 = () => {
-  const [counter, setCounter] = useState(0);
-
+  const [counter, setCounter] = useState(() => {
+    let cnt = localStorage.getItem('count');
+    return JSON.parse(cnt) || 0;
+  });
+  
+/*
+  Day 13-14: Effects management
+  - Using useEffect() to handle lifecycle-related events
+  - Calling non-React things as long as the component's state changes 
+*/
+  useEffect(() => {
+    localStorage.setItem('count', JSON.stringify(counter));
+  }, [counter]);
+  
   const handleCounterChange = (delta) => {
     setCounter((prevCounter) => prevCounter + delta);
   }
