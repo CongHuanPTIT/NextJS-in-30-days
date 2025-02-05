@@ -18,7 +18,7 @@ const F1Car = (props) => {
   );
 }
 
-const App = () => {
+const Tutorial1 = () => {
   let name = 'Huan';
   let me = true;
   return (
@@ -43,7 +43,7 @@ const App = () => {
   - Unlike JS, onClick is actually useful here  
 */
 
-const App2 = () => {
+const Tutorial2 = () => {
   const [counter, setCounter] = useState(() => {
     let cnt = localStorage.getItem('count');
     return JSON.parse(cnt) || 0;
@@ -73,4 +73,4 @@ const App2 = () => {
   );
 }
 
-export default App2;
+export default Tutorial2;
