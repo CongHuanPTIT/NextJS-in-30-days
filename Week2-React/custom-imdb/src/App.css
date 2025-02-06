@@ -88,6 +88,22 @@ h1 {
   font-family: var(--font-raleway);
 }
 
+.pagination {
+  margin-top: 2rem;
+  color: #f9d3b4;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.pagination button {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #f9d3b4;
+  background-color: #212426;
+  cursor: pointer;
+  margin: 2rem ;
+}
+
 .container {
   width: 100%;
   margin-top: 3rem;

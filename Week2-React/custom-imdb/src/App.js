@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import MovieInfo from "./Movie";
 import "./App.css";
 
-// https://www.youtube.com/watch?v=b9eMGE7QtTk
+// Taken from https://www.youtube.com/watch?v=b9eMGE7QtTk
 const keyAPI = "http://www.omdbapi.com/?i=tt3896198&apikey=9b3044c6";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const movieSearch = async (keyWord) => {
+  const movieSearch = async (keyWord, page = 1) => {
     if (keyWord.length < 4) {
       setMovies([]);
       setError("Enter at least 3 characters");
@@ -18,11 +20,13 @@ function App() {
     }
     setError("");
 
-    const response = await fetch(`${keyAPI}&s=${keyWord}`);
+    const response = await fetch(`${keyAPI}&s=${keyWord}&page=${page}`);
     const data = await response.json();
 
     if (data.Search) {
       setMovies(data.Search);
+      setTotalPages(Math.ceil(Number(data.totalResults / 10)));
+      setCurrentPage(page);
     } else {
       setMovies([]);
       setError("No movies found");
@@ -37,6 +41,9 @@ function App() {
       movieSearch(searchKey);
     }
   };
+  const handlePageChange = (newPage) => {
+    movieSearch(searchKey, newPage);
+  }
 
   useEffect(() => {
     movieSearch('');
@@ -71,6 +78,12 @@ function App() {
             ))}
           </div>
         ) : null}
+
+        <div className="pagination">
+          <button onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button onClick={() => handlePageChange(currentPage + 1)}>Next</button>
+        </div>
       </div>
     </>
   );
