@@ -6,7 +6,7 @@ import "./App.css";
 // from example https://www.youtube.com/watch?v=b9eMGE7QtTk
 // with optimization
 
-const keyAPI = "http://www.omdbapi.com/?i=tt3896198&apikey=9b3044c6";
+const keyAPI = "https://www.omdbapi.com/?i=tt3896198&apikey=9b3044c6";
 
 function App() {
   // Declare states
