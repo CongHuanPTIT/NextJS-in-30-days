@@ -2,54 +2,62 @@ import { useEffect, useState } from "react";
 import MovieInfo from "./Movie";
 import "./App.css";
 
-// Taken from https://www.youtube.com/watch?v=b9eMGE7QtTk
+// A movie poster project
+// from example https://www.youtube.com/watch?v=b9eMGE7QtTk
+// with optimization
+
 const keyAPI = "http://www.omdbapi.com/?i=tt3896198&apikey=9b3044c6";
 
 function App() {
+  // Declare states
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [onStartUp, setOnStartUp] = useState(false);
 
+  // Function to get all movies
   const movieSearch = async (keyWord, page = 1) => {
-    if (keyWord.length < 4) {
+    if (keyWord.length < 3) {
       setMovies([]);
       setError("Enter at least 3 characters");
       return;
     }
     setError("");
+    setOnStartUp(true);
 
+    // Get all movies
     const response = await fetch(`${keyAPI}&s=${keyWord}&page=${page}`);
     const data = await response.json();
 
     if (data.Search) {
       setMovies(data.Search);
-      setTotalPages(Math.ceil(Number(data.totalResults / 10)));
-      setCurrentPage(page);
+      setTotalPages(Math.ceil(Number(data.totalResults / 10)));   // Paginating the data
+      setCurrentPage(page);                                       // as the API only renders 10 results per page
     } else {
-      setMovies([]);
       setError("No movies found");
     }
   };
 
-  const getMovies = (event) => {
+  // Handle user input events
+  const getMovies = (event) => {      // hit search button
     setSearchKey(event.target.value);
   };
-  const handleEnterKey = (event) => {
+  const handleEnterKey = (event) => { // hit Enter
     if (event.key === "Enter") {
       movieSearch(searchKey);
     }
   };
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage) => { // change page
     movieSearch(searchKey, newPage);
-  }
+  };
 
-  useEffect(() => {
-    movieSearch('');
+  useEffect(() => {         // Renders the entire data 
+    movieSearch("");        // Empty array to ensure data is only rendered once per user event
   }, []);
 
-  return (
+  return (      // returns HTML of the whole page
     <>
       <div className="app">
         <h1>CineLand</h1>
@@ -67,22 +75,38 @@ function App() {
           />
         </div>
 
-        {error ? (
-          <div className="error">
-            <h2>{error}</h2>
+        {!onStartUp ? (
+          <div className="welcome">
+            <h2>Search for a title to get started!</h2>
           </div>
         ) : movies?.length > 0 ? (
           <div className="container">
             {movies.map((movie) => (
-              <MovieInfo movie={movie} />
+              <MovieInfo movie={movie} />       // Prop array to display data
             ))}
           </div>
-        ) : null}
+        ) : (
+          <div className="error">
+            <h2>{error}</h2>
+          </div>
+        )}
 
         <div className="pagination">
-          <button onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
-          <span>Page {currentPage} of {totalPages}</span>
-          <button onClick={() => handlePageChange(currentPage + 1)}>Next</button>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
     </>

@@ -73,7 +73,7 @@ h1 {
   cursor: pointer;
 }
 
-.error {
+.error, .welcome {
   width: 100%;
   margin-top: 3rem;
 
@@ -82,13 +82,15 @@ h1 {
   align-items: center;
 }
 
-.error h2 {
+.error, .welcome h2 {
   font-size: 1.25rem;
   color: #f9d3b4;
   font-family: var(--font-raleway);
 }
 
 .pagination {
+  align-items: center;
+  justify-content: center;
   margin-top: 2rem;
   color: #f9d3b4;
   font-weight: bold;
@@ -101,6 +103,13 @@ h1 {
   color: #f9d3b4;
   background-color: #212426;
   cursor: pointer;
+  margin: 2rem ;
+}
+
+.pagination button:disabled {
+  pointer-events: none;
+  background-color: #212426;
+  color: #212426;
   margin: 2rem ;
 }
 

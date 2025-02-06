@@ -1,5 +1,7 @@
 import React from "react";
 
+// "Movie" is the component, "movie" is a prop
+// The attributes are taken based on the data received from the API 
 const Movie = ({movie}) => {
   return (
     <div>
