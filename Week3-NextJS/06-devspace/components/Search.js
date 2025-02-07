@@ -32,7 +32,7 @@ export default function Search() {
               type="search"
               name="search"
               id="search"
-              className="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none w-72"
+              className="bg-white dark:bg-gray-800 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none w-72"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search Posts..."

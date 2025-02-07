@@ -9,10 +9,10 @@ export default function CategoryLabel({ children }) {
     Ruby: "red",
   };
   return (
-    <div
+    (<div
       className={`px-2 py-1 bg-${colorKey[children]}-600 text-gray-100 font-bold rounded`}
     >
-      <Link href={`/blog/category/${children.toLowerCase()}`}>{children}</Link>
-    </div>
+      <Link href={`/blog/category/${children.toLowerCase()}`} legacyBehavior>{children}</Link>
+    </div>)
   );
 }
