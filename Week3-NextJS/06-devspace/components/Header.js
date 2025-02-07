@@ -1,9 +1,17 @@
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // useEffect is used to prevent the header from rendering when the theme is not yet rendered
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <header className="bg-sky-600 dark:bg-gray-900 text-gray-100 shadow w-full">
