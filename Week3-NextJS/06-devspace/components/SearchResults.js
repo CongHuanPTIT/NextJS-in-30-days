@@ -1,23 +1,31 @@
-import Post from "./Post";
-import { FaTimes } from "react-icons/fa";
+import PropTypes from 'prop-types';
 
-export default function SearchResults({ results, closeSearch }) {
-  if (results.length === 0) 
-    return <></>;
+export default function SearchResults({ results = [], closeSearch }) {
+  if (results.length === 0) {
+    return;
+  }
+
   return (
-    <div className="absolute top-20 right-0 md:right-10 z-10 border-4 border-gray-500 bg-white text-black w-full md:w-6/12 rounded-2xl">
-      <div className="p-10">
-        <h2 className="text-3xl mb-3">
-          {results.length} Result{results.length > 1 && "s"}
-        </h2>
-        <FaTimes
-          className="absolute top-5 right-5 text-3xl text-gray-500 hover:text-gray-800"
-          onClick={closeSearch}
-        />
-        {results.map((result, index) => (
-          <Post key={index} post={result} compact={true} />
-        ))}
+    <div className="absolute top-0 left-0 w-full bg-white dark:bg-gray-800 z-50">
+      <div className="container mx-auto py-4">
+        <button onClick={closeSearch} className="text-gray-600 dark:text-gray-300">
+          Close
+        </button>
+        <ul>
+          {results.map((result) => (
+            <li key={result.slug} className="border-b border-gray-200 dark:border-gray-700">
+              <a href={`/posts/${result.slug}`} className="block p-4 hover:bg-gray-100 dark:hover:bg-gray-700">
+                {result.frontmatter.title}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
+
+SearchResults.propTypes = {
+  results: PropTypes.array,
+  closeSearch: PropTypes.func.isRequired,
+};

@@ -22,6 +22,11 @@ ol {
   line-height: 2.3;
 }
 
+.dark .blog-text pre {
+  background-color: #474343;
+  color: #f4f4f4;
+}
+
 .blog-text h1 {
   font-size: 35px;
 }

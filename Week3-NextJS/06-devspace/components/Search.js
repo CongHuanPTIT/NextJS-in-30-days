@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
-import SearchResults from "./SearchResults";
+import { useState, useEffect } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import SearchResults from './SearchResults';
 
 export default function Search() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const closeSearch = () => {
-    setSearchTerm("");
+    setSearchTerm('');
+    setSearchResults([]);
   };
 
   useEffect(() => {
     const getResults = async () => {
-      if (searchTerm === "") {
+      if (searchTerm === '') {
         setSearchResults([]);
       } else {
         const res = await fetch(`/api/search?q=${searchTerm}`);
@@ -26,7 +27,7 @@ export default function Search() {
   return (
     <div className="relative bg-gray-600 p-4">
       <div className="container mx-auto flex items-center justify-center md:justify-end">
-        <div className="relative text-gray-600 w-72">
+        <div className="relative text-gray-600 dark:text-white w-72">
           <form>
             <input
               type="search"
