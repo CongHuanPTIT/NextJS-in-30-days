@@ -72,7 +72,92 @@ Second Step: khai báo useEffect()
     };
 
 Như mọi người đã thấy, đối số của useEffect() là một hàm xử lý khi có gì thay đổi components. Sau đây là kết quả:    
-![react-hook](/images/posts/react-hook1.png)
+![react-hook1](/images/posts/react-hook1.png)
 
 Như vậy kết quả đã như chúng ta mong muốn 😃 Tuy nhiên check log đã, xem hàm useEffect này được gọi bao nhiêu lần
 
+    import React, {useEffect, useState} from 'react';
+
+    export const EffectDemo = () => {
+        //State
+        const [fullName, setFullName] = useState({name: 'name', familyName: 'family'});
+        const [title,setTitle] = useState('useEffect() in Hooks');
+
+        //useEffect
+        useEffect(() => {
+            console.log('useEffect has been called!');
+            setFullName({name:'TrungHC',familyName: 'HCT'});
+        });
+
+        return(
+            <div>
+                <h1>Title: {title}</h1>
+                <h3>Name: {fullName.name}</h3>
+                <h3>Family Name: {fullName.familyName}</h3>
+            </div>
+        );
+    };
+
+![react-hook2](/images/posts/react-hook2.png)
+
+Như vậy đúng như những gì chúng ta hiểu, __useEffect__ sẽ được gọi mỗi khi components thay đổi, 
+tuy nhiên ở đây thì đó không phải là thứ mà chúng ta mong muốn, 
+hiện tại useEffect đang là một method giống như hàm __componentDidUpdate__ vậy. 
+Để cho giống với __componentDidUpdate__ thực sự thì chúng ta cũng có thể điều khiển hàm __useEffect__ 
+bằng câu lệnh điều kiện, nó chính là tham số thứ 2 của hàm __useEffect()__. 
+Tham số thứ 2 của __useEffect__ là một mảng, mảng này cho biết rõ chỉ gọi __useEffect()__ 
+khi giá trị phần tử trong mảng thay đổi. Chẳng hạn:
+
+    useEffect(() => {
+        console.log('useEffect has been called!');
+        setFullName({ name: 'TrungHC', familyName: 'HCT' });
+    }, [fullName.name]);
+
+
+Như vậy hàm __useEffect()__ chỉ được gọi 2 lần: 
+1 lần khi render components, 1 lần khi set name thành "TrungHC".
+
+Vậy nếu chúng ta muốn hàm __useEffect()__ chỉ gọi 1 lần khi render components 
+(tương đương với __componentDidMount__) thì như thế nào? 
+Trong trường hợp này ta chỉ cần truyền tham số thứ 2 của __useEffect()__ là 1 hàm rỗng []:
+
+    useEffect(() => {
+        console.log('useEffect has been called!');
+        setFullName({ name: 'TrungHC', familyName: 'HCT' });
+    }, []);
+
+Với hàm này thì __useEffect()__ sẽ giống hệt với __componentDidMount__
+
+![react-hook3](/images/posts/react-hook3.png)
+
+Và Lifecycle cuối cùng cũng hay sử dụng nữa là hàm __componentWillUnmount__, 
+chúng ta cũng có thể sử dụng __useEffect()__ định nghĩa hàm __componentWillUnmount__.
+
+Như chúng ta đã biết thì __componentWillUnmount__ sẽ chạy mỗi khi một component 
+chuẩn bị remove khỏi tree DOM, cùng xét 1 ví dụ:
+
+    () => {
+        useEffect(() => {
+            const clickWindow = () => console.log('1')
+            window.addEventListener('click', clickWindow)
+
+            // return 1 function, sẽ được gọi ngay trước khi componentWillUnmount
+            return () => {
+            window.removeEventListener('click', clicked)
+            }
+        }, [])
+
+        return <div>F12 check log của trình duyệt!</div>
+    }
+
+Thực tế thì __useEffect__ cho phép chúng ta return 1 function, 
+function này sẽ thực thi trước khi mà component đó được Unmount.
+
+## 4. Tổng kết
+Như vậy với ReactHooks thì chúng ta gần như đã xử lý được state trong functional components, 
+những method cơ bản trong lifecycle đã được giải quyết với __useEffect()__. 
+Hy vọng qua bài viết này mọi người đã hiểu qua được cách sử dụng __useEffect()__.
+
+## 5. Tư liệu tham khảo
+- [ReactJS](https://reactjs.org/docs/hooks-effect.html)
+- [React Hooks: How to use useEffect](https://javascript.plainenglish.io/react-hooks-how-to-use-useeffect-ecea3e90d84f)
