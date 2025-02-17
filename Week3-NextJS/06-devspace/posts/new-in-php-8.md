@@ -8,8 +8,6 @@ author: "Sara Johnson"
 author_image: "https://randomuser.me/api/portraits/women/12.jpg"
 ---
 
-<!-- Markdow generator - https://jaspervdj.be/lorem-markdownum/ -->
-
 Lorem markdownum erat meritum instat quis! Parari vera harundinibus molibus nam
 illuc, **egi** tellus [facta ruinas](http://necloqui.com/fuit.html), iterumque!
 Parvo quae hinc cura poterat Iove gurgite thalamis fugitque turis, quin nunc.

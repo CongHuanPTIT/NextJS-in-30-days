@@ -1,12 +1,14 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { connect } from "http2";
 
 export default function handler(req, res) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ message: "Method Not Allowed" });
+  }
+
   let posts;
   if (process.env.NODE_ENV === "production") {
-    // fetch from cache
     posts = require("../../cache/data").posts;
   } else {
     const files = fs.readdirSync(path.join("posts"));
@@ -19,15 +21,15 @@ export default function handler(req, res) {
       const { data: frontmatter } = matter(markdownWithMeta);
       return {
         frontmatter,
-        slug,
+        slug: `/blog/${slug}`,
       };
     });
   }
-  const results = posts.filter(
-    ({ frontmatter: { title, excerpt, category } }) =>
-      title.toLowerCase().indexOf(req.query.q) != -1 ||
-      excerpt.toLowerCase().indexOf(req.query.q) != -1 ||
-      category.toLowerCase().indexOf(req.query.q) != -1
+
+  const query = req.query.q?.toLowerCase() || "";
+  const results = posts.filter(({ frontmatter: { title, excerpt, category } }) =>
+    [title, excerpt, category].some((field) => field.toLowerCase().includes(query))
   );
-  res.status(200).json(JSON.stringify({ results }));
+
+  return res.status(200).json({ results });
 }
