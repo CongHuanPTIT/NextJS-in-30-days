@@ -2,10 +2,12 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [ mounted, setMounted ] = useState(false);
+  const { data: session } = useSession();
 
   // useEffect is used to prevent the header from rendering when the theme is not yet rendered
   useEffect(() => setMounted(true), []);
@@ -41,6 +43,25 @@ export default function Header() {
             className="mx-5 cursor-pointer uppercase hover:text-indigo-300">
             {theme === "dark" ? "Dark mode" : "Light mode"} 
           </button>
+          {session ? (
+            <div className="flex items-center gap-4">
+              <span> Welcome,
+                <Link href="/user-info" className="mx-5 hover:text-indigo-300">
+                  {session.user.name || "User"}
+                </Link>
+              </span>
+              <button 
+                onClick={() => signOut()} 
+                className="bg-red-500 text-white uppercase px-3 py-1 rounded hover:bg-red-600"
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <Link href="/signin" className="mx-5 uppercase hover:text-indigo-300">
+              Sign In
+            </Link>
+          )}
         </nav>
       </div>
     </header>

@@ -1,17 +1,16 @@
 ---
 title: "Sử dụng useEffect() trong ReactHooks"
 date: "July 4, 2021"
-excerpt: "We will look at 10 simple tips and tricks to increase the speed of your code when writing JS"
+excerpt: "Tìm hiểu về cách sử dụng useEffect() trong React Hooks. Đây là một tính năng mạnh mẽ của React để quản lý side effect trong các functional component."
 cover_image: "/images/posts/img1.jpg"
 category: "JavaScript"
 author: "John Doe"
 author_image: "https://randomuser.me/api/portraits/men/11.jpg"
 ---
 
-<!-- Markdow generator - https://jaspervdj.be/lorem-markdownum/ -->
+**Hooks là một tính năng mới được thêm vào React 16.8. Nó cho phép bạn có thể sử dụng state và các chứ năng khác của React mà không cần khởi tạo Class, điều đó có nghĩa là có thể sử dụng state trong functional component.**
 
-- Hooks là một tính năng mới được thêm vào React 16.8. Nó cho phép bạn có thể sử dụng state và các chứ năng khác của React mà không cần khởi tạo Class, điều đó có nghĩa là có thể sử dụng state trong functional component.
-- Effect Hook cho phép thực hiện side effect bên trong các function component.
+**Effect Hook cho phép thực hiện side effect bên trong các function component.**
 
 1. React hook và useEffect() là gì?
 2. Cách sử dụng useEffect() trong nhiều trường hợp

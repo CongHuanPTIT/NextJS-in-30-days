@@ -32,8 +32,10 @@ export default function PostPage({
           </div>
           <div className="mr-4">{date}</div>
         </div>
-        <div className="blog-text mt-2">
-          <div dangerouslySetInnerHTML={{ __html: marked.parse(content) }}></div>
+        <div className="blog-text mt-2 prose lg:prose-xl max-w-none dark:prose-invert">
+          <div
+            dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
+          ></div>
         </div>
       </div>
     </Layout>
