@@ -10,7 +10,8 @@ export default function Home() {
         <p className="mb-3">This is a blog built with Next.js and Markdown</p>
 
         <p>
-          <span className="font-bold">Version 1.0.0</span>
+          <span className="font-bold">Version 1.1.0</span>
+          <span>Fixes search function and added a sample signin button.</span>
         </p>
       </div>
     </Layout>

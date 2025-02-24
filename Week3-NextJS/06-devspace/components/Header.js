@@ -43,13 +43,11 @@ export default function Header() {
             className="mx-5 cursor-pointer uppercase hover:text-indigo-300">
             {theme === "dark" ? "Dark mode" : "Light mode"} 
           </button>
-          {session ? (
+          {session && session.user ? (
             <div className="flex items-center gap-4">
-              <span> Welcome,
-                <Link href="/user-info" className="mx-5 hover:text-indigo-300">
-                  {session.user.name || "User"}
-                </Link>
-              </span>
+              <Link href="/user-info" className="mx-5 hover:text-indigo-300">
+                Welcome, {session.user.username || "User"}
+              </Link>
               <button 
                 onClick={() => signOut()} 
                 className="bg-red-500 text-white uppercase px-3 py-1 rounded hover:bg-red-600"
